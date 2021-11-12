@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:camel="http://camel.apache.org/schema/spring"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-3.0.xsd        http://camel.apache.org/schema/spring https://camel.apache.org/schema/spring/camel-spring.xsd">
+    <routeContext id="route-context-eliminar-usuario" xmlns="http://camel.apache.org/schema/spring">
+        <route id="route-eliminar-usuario">
+            <from id="_from-borrar-usuario" uri="direct:eliminar-usuario"/>
+            <log id="_log-inicio-borrar-usuario" message="::Inicio Ruta borrar usuario::   ==> ${body}"/>
+            <setProperty id="_setPropertyAuthorization-eliminar" propertyName="Authorization">
+                <simple>${header.Authorization} </simple>
+            </setProperty>
+            <removeHeaders id="_removeTodosHeaders-eliminar" pattern="*"/>
+            <setHeader headerName="Content-Type" id="_setHeaderContentTypeCU-eliminar">
+                <constant>application/json</constant>
+            </setHeader>
+            <setHeader headerName="Accept" id="_setHeaderAcceptCU-eliminar">
+                <constant>application/json</constant>
+            </setHeader>
+            <setHeader headerName="Authorization" id="_setHeaderAuthorization-eliminar">
+                <simple>${property.Authorization}</simple>
+            </setHeader>
+            <setHeader headerName="lotacao" id="_setHeaderLocatao-eliminar">
+                <simple>21</simple>
+            </setHeader>
+            <marshal id="_marshalRequest-eliminar">
+                <custom ref="jack"/>
+            </marshal>
+            <log id="_log-ruta-luego-marshal-eliminar" message="::Ruta Consultar Borrar Usuario Luego Del Marshal:: ${body}"/>
+            <log id="_log-fin-ruta-antes-url-eliminar" message="::Fin Ruta Borrar Usuario::"/>
+            <to id="_toHttpAU-eliminar" uri="https4://{{url.usuarios}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false"/>
+            <choice id="_choice-resultado-eliminar">
+                <when id="_when-resultado-ok-eliminar">
+                    <simple resultType="boolean">${header.CamelHttpResponseCode} == '200'</simple>
+                    <log id="_logHeaders" loggingLevel="INFO" message="Resultado:  ${header.CamelHttpResponseCode}"/>
+                    <unmarshal id="_unmarshalRequest-eliminar">
+                        <custom ref="jack"/>
+                    </unmarshal>
+                </when>
+            </choice>
+        </route>
+    </routeContext>
+</beans>

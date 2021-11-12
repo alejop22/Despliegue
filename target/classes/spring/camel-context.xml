@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring       https://camel.apache.org/schema/spring/camel-spring-2.21.5.xsd">
+    <import resource="routes/consultar-usuario.xml"/>
+    <import resource="routes/crear-usuario.xml"/>
+    <import resource="routes/actualizar-usuario.xml"/>
+    <import resource="routes/eliminar-usuario.xml"/>
+    <camelContext id="camel" xmlns="http://camel.apache.org/schema/spring">
+        <routeContextRef ref="route-context-consultar-usuario"/>
+        <routeContextRef ref="route-context-crear-usuario"/>
+        <routeContextRef ref="route-context-actualizar-usuario"/>
+        <routeContextRef ref="route-context-eliminar-usuario"/>
+        <dataFormats>
+            <json id="jack" library="Jackson"/>
+        </dataFormats>
+        <restConfiguration bindingMode="auto" component="netty4-http"
+            contextPath="/rs" port="8086"/>
+        <rest id="rest-api-consultar-usuario" path="/api">
+            <delete id="rest-delete-eliminar-usuario" uri="/proceso/judicial/v1.0">
+                <to id="to-route-eliminar" uri="direct:eliminar-usuario"/>
+            </delete>
+            <put id="rest-put-actualizar-usuario" uri="/proceso/judicial/v1.0">
+                <to id="to-route-actualizar" uri="direct:actualizar-usuario"/>
+            </put>
+            <post id="rest-post-crear-usuario" uri="/proceso/judicial/v1.0">
+                <to id="to-route-crear" uri="direct:crear-usuario"/>
+            </post>
+            <get id="rest-get-consultar-usuarios" uri="/proceso/judicial/v1.0">
+                <to id="to-route-consultar" uri="direct:consultar-usuarios"/>
+            </get>
+        </rest>
+    </camelContext>
+</beans>
