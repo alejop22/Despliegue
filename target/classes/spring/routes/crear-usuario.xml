@@ -2,12 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:camel="http://camel.apache.org/schema/spring"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-3.0.xsd        http://camel.apache.org/schema/spring https://camel.apache.org/schema/spring/camel-spring.xsd">
-	<routeContext id="route-context-crear-usuario" xmlns="http://camel.apache.org/schema/spring">
-		<route id="route-crear-usuario">
+    <routeContext id="route-context-crear-usuario" xmlns="http://camel.apache.org/schema/spring">
+        <route id="route-crear-usuario">
             <from id="from-rest-crear" uri="direct:crear-usuario"/>
             <log id="log-inicio-crear" message="=== INICIO SERVICIO CREAR==="/>
             <setProperty id="_setPropertyAuthorization-crear" propertyName="Authorization">
-                <simple>${header.Authorization} </simple>
+                <simple>${header.Authorization}</simple>
             </setProperty>
             <removeHeaders id="_removeTodosHeaders-crear" pattern="*"/>
             <setHeader headerName="Content-Type" id="_setHeaderContentTypeCU-crear">
@@ -20,7 +20,7 @@
                 <simple>${property.Authorization}</simple>
             </setHeader>
             <setHeader headerName="lotacao" id="_setHeader-crear">
-                <simple>1</simple>
+                <simple>21</simple>
             </setHeader>
             <setHeader headerName="camelHttpMethod" id="_setHeaderCamelHttpMethodCC-crear">
                 <constant>POST</constant>
@@ -38,5 +38,5 @@
                 </when>
             </choice>
         </route>
-	</routeContext>
+    </routeContext>
 </beans>
