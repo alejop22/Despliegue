@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.1.4-b01-. --><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.servisoft.com.co/Mercurio/Servicios/Schema/FichaRadicacion" xmlns:transaccion="http://www.servisoft.com.co/Mercurio/Servicios/Schema/Transaccion" targetNamespace="http://www.servisoft.com.co/Mercurio/Servicios/Schema/FichaRadicacion">
+	<xsd:import namespace="http://www.servisoft.com.co/Mercurio/Servicios/Schema/Transaccion" schemaLocation="Transaccion.xsd"></xsd:import>
+
+	<xsd:element name="FichaRadicacionRequest" type="tns:FichaRadicacionRequest"></xsd:element>
+	<xsd:element name="FichaRadicacionResponse" type="tns:FichaRadicacionResponse"></xsd:element>
+
+	<xsd:complexType name="FichaRadicacionRequest">
+		<xsd:sequence>
+			<xsd:element name="idRadicado" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="idTipoDocumento" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FichaRadicacionResponse">
+		<xsd:sequence>
+			<xsd:element name="resultado" type="xsd:boolean" minOccurs="1"></xsd:element>
+			<xsd:element name="Transaccion" type="transaccion:Transaccion" minOccurs="1"></xsd:element>
+			<xsd:element name="FichaRadicado" type="tns:FichaRadicado" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="FichaRadicado">
+		<xsd:sequence>
+			<xsd:element name="idRadicado" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="idTipoDocumento" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="fechaRadicacion" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="radicadoOrigen" type="tns:RadicadoOrigen" minOccurs="0" maxOccurs="1"></xsd:element>
+			<xsd:element name="radicadoTemporal" type="tns:RadicadoTemporal" minOccurs="0" maxOccurs="1"></xsd:element>
+			<xsd:element name="destinatario" type="tns:Destinatario" minOccurs="1"></xsd:element>
+			<xsd:element name="usuarioRadicador" type="tns:UsuarioRadicador" minOccurs="1"></xsd:element>
+			<xsd:element name="fuenteDocumento" type="tns:FuenteDocumento" minOccurs="1"></xsd:element>
+			<xsd:element name="remitente" type="tns:Remitente" minOccurs="1"></xsd:element>
+			<xsd:element name="tipoDocumento" type="tns:TipoDocumento" minOccurs="1"></xsd:element>
+			<xsd:element name="asunto" type="tns:Asunto" minOccurs="1"></xsd:element>
+			<xsd:element name="ruta" type="tns:Ruta" minOccurs="0" maxOccurs="1"></xsd:element>
+			<xsd:element name="destinatarioCopia" type="tns:DestinatariosCopia" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+			<xsd:element name="informacionAdicional" type="tns:InformacionAdicional" minOccurs="1"></xsd:element>
+			<xsd:element name="InformacionAnexoFolioCaja" type="tns:InformacionAnexoFolioCaja" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RadicadoOrigen">
+		<xsd:sequence>
+			<xsd:element name="idRadicadoOrigen" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="fechaRadicadoOrigen" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="RadicadoTemporal">
+		<xsd:sequence>
+			<xsd:element name="idRadicadoTemporal" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="fechaRadicacionTemporal" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InformacionAnexoFolioCaja">
+		<xsd:sequence>
+			<xsd:element name="numAnexo" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="numFolio" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="numCaja" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="InformacionAdicional">
+		<xsd:sequence>
+			<xsd:element name="referencia" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="observacion" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="indicadorRespuesta" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Destinatario">
+		<xsd:sequence>
+			<xsd:element name="idDestinatario" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomDestinatario" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomciudadDestinatario" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nompaisDestinatario" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="UsuarioRadicador">
+		<xsd:sequence>
+			<xsd:element name="idUsuarioRad" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomUsuarioRad" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="FuenteDocumento">
+		<xsd:sequence>
+			<xsd:element name="fuenteDocumento" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="idTipoFuenteDocumento" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="DescripcionFuenteDocumento" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Remitente">
+		<xsd:sequence>
+			<xsd:element name="idRemitente" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomRemitente" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomCiudadRemitente" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+			<xsd:element name="nomPaisRemitente" type="xsd:string" minOccurs="0" maxOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="TipoDocumento">
+		<xsd:sequence>
+			<xsd:element name="idTipo" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomTipoDoc" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="idPrioridad" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Asunto">
+		<xsd:sequence>
+			<xsd:element name="idAsunto" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomAsunto" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="tiempoRespuesta" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="unidadRespuesta" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="Ruta">
+		<xsd:sequence>
+			<xsd:element name="idRuta" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="indicadorRuta" type="xsd:string" minOccurs="1"></xsd:element>	
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="DestinatariosCopia">
+		<xsd:sequence>
+			<xsd:element name="idDestinatarioCopia" type="xsd:string" minOccurs="1"></xsd:element>
+			<xsd:element name="nomDestinatarioCopia" type="xsd:string" minOccurs="1"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>
